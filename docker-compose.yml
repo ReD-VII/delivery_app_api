@@ -1,0 +1,36 @@
+# docker-compose.yml
+
+version: '3.8'
+
+services:
+  # Serviço do banco de dados PostgreSQL
+  db:
+    image: postgres:15  # Usando a versão mais recente do PostgreSQL
+    container_name: cardapio_db  # Nome do container
+    restart: always  # Reinicia automaticamente em caso de falha
+    environment:
+      POSTGRES_USER: admin  # Usuário do banco de dados
+      POSTGRES_PASSWORD: secret  # Senha do banco de dados
+      POSTGRES_DB: cardapio  # Nome do banco de dados
+    ports:
+      - "5432:5432"  # Mapeia a porta do host para o container
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persistência dos dados do banco
+
+  # Serviço da API FastAPI
+  api:
+    build: .  # Constrói a imagem a partir do Dockerfile no diretório raiz
+    container_name: cardapio_api  # Nome do container
+    restart: always  # Reinicia automaticamente em caso de falha
+    depends_on:
+      - db  # Garante que o banco de dados esteja rodando antes da API
+    environment:
+      DATABASE_URL: postgresql://admin:secret@db:5432/cardapio  # URL de conexão com o banco
+    ports:
+      - "8000:8000"  # Mapeia a porta do host para a API
+    volumes:
+      - .:/app  # Mapeia o diretório do projeto local para dentro do container
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]  # Comando para rodar a API
+
+volumes:
+  postgres_data:  # Volume para persistência do banco de dados
