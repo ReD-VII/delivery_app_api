@@ -20,17 +20,18 @@ Este projeto é uma API REST para gerenciamento de um **cardápio**, desenvolvid
 ```
 /cardapio-api
 │── /app
-│   │── /models         # Definição das tabelas do 
-│   │── /schemas        # Schemas do Pydantic para 
+│   │── /models         # Definição das tabelas do banco
+│   │── /schemas        # Schemas do Pydantic para validação
 │   │── /routes         # Rotas da API
 │   │── /services       # Lógica de negócio
-│   │── /db             # Configuração do banco e 
+│   │── /db             # Configuração do banco e migrations
 │   │── main.py         # Ponto de entrada da API
 │── /tests              # Testes automatizados
 │── .env                # Variáveis de ambiente
-│── Dockerfile          # Arquivo para criar 
-│── docker-compose.yml  # Orquestração dos 
+│── Dockerfile          # Arquivo para criar imagem Docker
+│── docker-compose.yml  # Orquestração dos containers
 │── requirements.txt    # Dependências do projeto
+│── README.md           # Documentação do projeto
 ```
 
 ## 🛠️ Configuração e Execução
@@ -101,15 +102,21 @@ SELECT * FROM menu;  -- Verifica os dados cadastrados
 ✅ Remoção de itens (`DELETE /menu/{id}`)
 ✅ Persistência no PostgreSQL
 ✅ Testes automatizados
+✅ Integração com Docker para fácil deploy
 
 ## 🚀 Próximos Passos
 
 🔹 Melhorar autenticação com **JWT**
 🔹 Implementar **paginação** nos endpoints
 🔹 Criar **testes automatizados** mais robustos
+🔹 Adicionar documentação detalhada sobre cada endpoint
+🔹 Melhorar logs e monitoramento da API
 
 ---
 
 **Desenvolvido por Roney Fernandes 💻🚀**
 
 📱 Contato: 98981767685
+
+📧 Email: redvii.developer\@gmail.com
+
